@@ -1,0 +1,22 @@
+{{ define "index" }}
+<!DOCTYPE html>
+    <html lang="en">
+        {{ template "head" . }}
+        <body>
+            <header>
+                <h1><a href="/">{{.Name}}</a></h1>
+                <p>{{.Profession}}</p>
+                <nav>
+                    <ul>
+                        <li><a href="/blog">Blog</a></li>
+                    </ul>
+                </nav>
+            </header>
+            <section>
+                <p>{{.DescriptionBody}}</p>
+                <br>
+                <p>Outside of <a href="#">work</a>, I enjoy <a href="https://github.com/mmatongo">contributing to open source projects</a> and learning languages.</p>
+            </section>
+        </body>
+    </html>
+{{end}}

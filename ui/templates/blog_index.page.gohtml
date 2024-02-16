@@ -1,0 +1,26 @@
+<!-- ui/templates/index.page.html -->
+{{define "blogIndex"}}
+    <!DOCTYPE html>
+    <html lang="en">
+    {{ template "head" . }}
+    <body>
+        <header>
+            <h1><a href="/">{{.BlogName}}</a></h1>
+            <p>{{.Profession}}</p>
+            <nav>
+                <ul>
+                    <li><a href="/blog">Blog Home</a></li>
+                    <li><a href="/">Home</a></li>
+                </ul>
+            </nav>
+        </header>
+        <div>
+            <ul>
+                {{range .Posts}}
+                <li><a href="/blog/{{.URL}}">{{.Title}}</a></li>
+                {{end}}
+            </ul>
+        </div>
+    </body>
+    </html>
+{{end}}
