@@ -78,9 +78,10 @@ func (a *app) handleBlogIndex(w http.ResponseWriter, r *http.Request) {
 	})
 
 	err := indexTmpl.ExecuteTemplate(w, "blogIndex", map[string]interface{}{
-		"Posts":    posts,
-		"BlogName": a.config["blog_name"],
-		"Name":     a.config["blog_name"],
+		"Posts":      posts,
+		"BlogName":   a.config["blog_name"],
+		"Profession": a.config["profession"],
+		"Name":       a.config["blog_name"],
 	})
 
 	if err != nil {

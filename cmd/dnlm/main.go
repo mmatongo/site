@@ -34,6 +34,7 @@ func main() {
 		infoLog:  log.New(os.Stdout, "[INFO]\t", log.Ldate|log.Ltime),
 		config:   make(map[string]interface{}),
 	}
+
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "4000"
