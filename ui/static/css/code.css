@@ -10,9 +10,10 @@ pre {
     word-wrap: break-word;
 
     padding: var(--gap);
-    border: var(--border);
+    /* border: var(--border); */
     max-inline-size: calc(100% + 1.75 * var(--gap));
     overflow-x: auto;
+    font-size: small;
 }
 
 :not(figure) > pre {

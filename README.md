@@ -24,8 +24,8 @@ The following directories and their contents are Copyright Daniel M. Matongo. Yo
 
 ```sh
 blog/
-_notes/
-ui/static/_images/
+notes/
+ui/static/images/
 ```
 
 All other directories and files are MIT Licensed (where applicable).
@@ -36,4 +36,4 @@ All other directories and files are MIT Licensed (where applicable).
 - [] Notes
 - [] Recent Posts
 - [] Tags
-- [] Asset compression
+- [] Asset [compression](https://github.com/tdewolff/minify)

@@ -53,9 +53,12 @@ func (a *app) watchFiles() {
 				if !ok {
 					return
 				}
-				if event.Op&fsnotify.Write == fsnotify.Write || event.Op&fsnotify.Create == fsnotify.Create || event.Op&fsnotify.Remove == fsnotify.Remove {
-					a.infoLog.Println("modified file:", event.Name)
+				switch event.Op {
+				case fsnotify.Write, fsnotify.Create, fsnotify.Remove, fsnotify.Rename:
+					a.infoLog.Printf("%s: %s\n", event.Op, event.Name)
 					updateURLToFileMap(event.Name)
+				case fsnotify.Chmod:
+					// Ignore CHMOD events
 				}
 			case err, ok := <-a.watcher.Errors:
 				if !ok {
