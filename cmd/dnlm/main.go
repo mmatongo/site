@@ -40,7 +40,9 @@ func main() {
 		port = "4000"
 	}
 
-	a.initConfig()
+	config := a.acceptArgs()
+
+	a.initConfig(config)
 	a.initURLToFileMap()
 	a.watchFiles()
 

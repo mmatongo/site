@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"io/fs"
 	"os"
 	"path/filepath"
@@ -10,13 +11,12 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-func (a *app) initConfig() {
-	config, err := os.ReadFile("config/config.yml")
+func (a *app) initConfig(configPath string) {
+	config, err := os.ReadFile(configPath)
 	if err != nil {
 		a.errorLog.Fatalf("Error reading config file: %v", err)
 	}
 	err = yaml.Unmarshal(config, &a.config)
-
 	if err != nil {
 		a.errorLog.Fatalf("Error unmarshalling config file: %v", err)
 	}
@@ -28,11 +28,10 @@ func (a *app) initURLToFileMap() {
 			return err
 		}
 		if !d.IsDir() {
-			updateURLToFileMap(path)
+			a.updateURLToFileMap(path)
 		}
 		return nil
 	})
-
 	if err != nil {
 		a.errorLog.Fatalf("Failed to walk blog directory: %v", err)
 	}
@@ -41,7 +40,6 @@ func (a *app) initURLToFileMap() {
 func (a *app) watchFiles() {
 	var err error
 	a.watcher, err = fsnotify.NewWatcher()
-
 	if err != nil {
 		a.errorLog.Fatal(err)
 	}
@@ -56,7 +54,7 @@ func (a *app) watchFiles() {
 				switch event.Op {
 				case fsnotify.Write, fsnotify.Create, fsnotify.Remove, fsnotify.Rename:
 					a.infoLog.Printf("%s: %s\n", event.Op, event.Name)
-					updateURLToFileMap(event.Name)
+					a.updateURLToFileMap(event.Name)
 				case fsnotify.Chmod:
 					// Ignore CHMOD events
 				}
@@ -75,7 +73,7 @@ func (a *app) watchFiles() {
 	}
 }
 
-func updateURLToFileMap(filePath string) {
+func (a *app) updateURLToFileMap(filePath string) {
 	if filepath.Ext(filePath) != ".md" {
 		return
 	}
@@ -92,4 +90,19 @@ func updateURLToFileMap(filePath string) {
 	} else {
 		urlToFileMap[urlPath] = filePath
 	}
+}
+
+func (a *app) acceptArgs() string {
+	var config string
+	flag.StringVar(&config, "config", "", "Path to your custom config.")
+	flag.Parse()
+
+	if config == "" {
+		a.infoLog.Println("No config path provided, defaulting to config/config.yml")
+		config = "config/config.yml"
+	} else {
+		a.infoLog.Printf("Config path %s received, parsing yaml file for values.", config)
+	}
+
+	return config
 }
