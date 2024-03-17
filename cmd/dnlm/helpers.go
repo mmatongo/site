@@ -144,11 +144,11 @@ func getFileCreationTime(nativeInfo *syscall.Stat_t) (time.Time, bool) {
 }
 
 func getBirthTime(nativeInfo *syscall.Stat_t) time.Time {
-	return getTimeFromTimespec(nativeInfo, unsafe.Pointer(&nativeInfo.Ctimespec))
+	return getTimeFromTimespec(nativeInfo, unsafe.Pointer(&nativeInfo.Ctim))
 }
 
 func getModTime(nativeInfo *syscall.Stat_t) time.Time {
-	return getTimeFromTimespec(nativeInfo, unsafe.Pointer(&nativeInfo.Mtimespec))
+	return getTimeFromTimespec(nativeInfo, unsafe.Pointer(&nativeInfo.Mtim))
 }
 
 func getTimeFromTimespec(_ *syscall.Stat_t, specField unsafe.Pointer) time.Time {
