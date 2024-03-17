@@ -13,12 +13,13 @@
                 </ul>
             </nav>
         </header>
-        <div>
-            <ul>
-                {{range .Posts}}
-                <li><a href="/blog/{{.URL}}">{{.Title}}</a></li>
-                {{end}}
-            </ul>
+        <div class="posts-grid">
+            {{range .Posts}}
+                <div class="post-item">
+                    <a href="/blog/{{.URL}}">{{.Title}}</a>
+                    <p>{{.Time}}</p>
+                </div>
+            {{end}}
         </div>
     </body>
     </html>
