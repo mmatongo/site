@@ -120,9 +120,9 @@ func (a *app) getCreationDate(info os.FileInfo) (time.Time, error) {
 		return time.Time{}, errors.New("failed to get native file information")
 	}
 
-	if nativeInfo.Birthtimespec.Nsec == 0 {
-		return time.Time{}, errors.New("file system doesn't support creation time")
+	if nativeInfo.Birthtimespec.Nsec != 0 {
+		return time.Unix(nativeInfo.Birthtimespec.Sec, int64(nativeInfo.Birthtimespec.Nsec)), nil
 	}
 
-	return time.Unix(nativeInfo.Birthtimespec.Sec, nativeInfo.Birthtimespec.Nsec), nil
+	return time.Unix(int64(nativeInfo.Mtimespec.Sec), int64(nativeInfo.Mtimespec.Nsec)), nil
 }
