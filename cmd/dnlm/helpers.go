@@ -1,11 +1,13 @@
 package main
 
 import (
+	"bufio"
 	"errors"
 	"flag"
 	"io/fs"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strings"
 	"syscall"
 	"time"
@@ -149,4 +151,72 @@ func getTimeFromTimespec(_ *syscall.Stat_t, specField unsafe.Pointer) time.Time 
 		return time.Time{}
 	}
 	return time.Unix(tspec.Sec, int64(tspec.Nsec))
+}
+
+func (a *app) getNameFromFilePath(filePath string) string {
+	title := strings.Title(strings.TrimSuffix(strings.TrimPrefix(filePath, "blog/"), ".md"))
+	title = strings.Replace(title, "-", " ", -1)
+
+	return title
+}
+
+func (a *app) estimateReadingTime(filePath string) (int, int, error) {
+	file, err := os.Open(filePath)
+	if err != nil {
+		return 0, 0, err
+	}
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	wordCount := 0
+	wordRegex := regexp.MustCompile(`\w+`)
+
+	for scanner.Scan() {
+		line := scanner.Text()
+		cleanedLine := a.removeMarkdownSyntax(line)
+		words := wordRegex.FindAllString(cleanedLine, -1)
+		wordCount += len(words)
+	}
+
+	if err := scanner.Err(); err != nil {
+		return 0, 0, err
+	}
+
+	const averageWordsPerMinute = 200
+	totalReadingTimeSeconds := (wordCount * 60) / averageWordsPerMinute
+
+	readingTimeMinutes := totalReadingTimeSeconds / 60
+	readingTimeSeconds := totalReadingTimeSeconds % 60
+
+	if readingTimeMinutes == 0 && wordCount > 0 {
+		readingTimeMinutes = 1
+	}
+
+	return readingTimeMinutes, readingTimeSeconds, nil
+}
+
+func (a *app) removeMarkdownSyntax(text string) string {
+	patterns := []string{
+		`\[\S.*?\]\(.*?\)`,  // Links: [link text](url)
+		`!\[\S.*?\]\(.*?\)`, // Images: ![alt text](image url)
+		`__\S.*?__`,         // Bold with __text__
+		`\\*\\*.*?\\*\\*`,   // Bold with **text**
+		`_\S.*?_`,           // Italic with _text_
+		`\\*.*?\\*`,         // Italic with *text*
+		"`.*?`",             // Inline code with `code`
+		`~~.*?~~`,           // Strikethrough with ~~text~~
+		`<.*?>`,             // HTML tags
+		`#+`,                // Headings
+		`-{3,}`,             // Horizontal rules
+		`-{2,}`,             // Em dashes
+		`-{1,}`,             // En dashes
+		`[0-9]+\..*`,        // Ordered lists
+		`[*+-].*`,           // Unordered lists
+		`>.*`,               // Blockquotes
+	}
+	for _, pattern := range patterns {
+		re := regexp.MustCompile(pattern)
+		text = re.ReplaceAllString(text, "")
+	}
+	return text
 }
