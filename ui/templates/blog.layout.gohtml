@@ -4,8 +4,7 @@
     {{ template "head" .}}
     <body class="blog-body">
         <header>
-            <h1><a href="/">{{.Name}}</a></h1>
-            <p>{{.Profession}}</p>
+            <h1><a href="{{.Path}}">{{.Name}}</a></h1>
             <nav>
                 <ul>
                     <li><a href="/">Home</a></li>
