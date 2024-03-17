@@ -9,6 +9,7 @@ import (
 	"strings"
 	"syscall"
 	"time"
+	"unsafe"
 
 	"github.com/fsnotify/fsnotify"
 	"gopkg.in/yaml.v3"
@@ -120,9 +121,40 @@ func (a *app) getCreationDate(info os.FileInfo) (time.Time, error) {
 		return time.Time{}, errors.New("failed to get native file information")
 	}
 
-	if nativeInfo.Birthtimespec.Nsec != 0 {
-		return time.Unix(nativeInfo.Birthtimespec.Sec, int64(nativeInfo.Birthtimespec.Nsec)), nil
+	birthTime, ok := getFileCreationTime(nativeInfo)
+	if !ok {
+		return time.Time{}, errors.New("file system doesn't support creation time")
 	}
 
-	return time.Unix(int64(nativeInfo.Mtimespec.Sec), int64(nativeInfo.Mtimespec.Nsec)), nil
+	return birthTime, nil
+}
+
+func getFileCreationTime(nativeInfo *syscall.Stat_t) (time.Time, bool) {
+	birthTime := getBirthTime(nativeInfo)
+	if !birthTime.IsZero() {
+		return birthTime, true
+	}
+
+	modTime := getModTime(nativeInfo)
+	if !modTime.IsZero() {
+		return modTime, false
+	}
+
+	return time.Time{}, false
+}
+
+func getBirthTime(nativeInfo *syscall.Stat_t) time.Time {
+	return getTimeFromTimespec(nativeInfo, unsafe.Pointer(&nativeInfo.Birthtimespec))
+}
+
+func getModTime(nativeInfo *syscall.Stat_t) time.Time {
+	return getTimeFromTimespec(nativeInfo, unsafe.Pointer(&nativeInfo.Mtimespec))
+}
+
+func getTimeFromTimespec(_ *syscall.Stat_t, specField unsafe.Pointer) time.Time {
+	tspec := (*syscall.Timespec)(specField)
+	if tspec == nil || (tspec.Sec == 0 && tspec.Nsec == 0) {
+		return time.Time{}
+	}
+	return time.Unix(tspec.Sec, int64(tspec.Nsec))
 }
