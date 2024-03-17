@@ -68,10 +68,13 @@ func (a *app) handleBlog(w http.ResponseWriter, r *http.Request) {
 
 	output := markdown.ToHTML([]byte(formattedContent), nil, nil)
 
+	name := a.getNameFromFilePath(filePath)
+
 	err = blogTmpl.ExecuteTemplate(w, "blog", map[string]interface{}{
-		"Name":            a.config["blog_name"],
+		"Name":            fmt.Sprintf("%s - %s", a.config["blog_name"], name),
 		"DescriptionMeta": a.config["description"],
 		"Content":         template.HTML(output),
+		"Path":            r.URL.Path,
 	})
 
 	if err != nil {
@@ -84,12 +87,19 @@ func (a *app) handleBlogIndex(w http.ResponseWriter, r *http.Request) {
 
 	mapMutex.RLock()
 	for url, filePath := range urlToFileMap {
-		title := strings.Replace(strings.TrimPrefix(filePath, "blog/"), "-", " ", -1)
+
 		// though golang.org/x/text/case can be used, it's not worth the dependency
-		title = strings.Title(strings.TrimSuffix(title, ".md"))
+		title := a.getNameFromFilePath(filePath)
+		minutes, seconds, err := a.estimateReadingTime(filePath)
+		if err != nil {
+			a.errorLog.Printf("Error estimating reading time: %v\n", err)
+		}
+		timeToRead := fmt.Sprintf("%d.%d min", minutes, seconds)
+
 		posts = append(posts, blogPost{
 			Title: title,
 			URL:   url,
+			Time:  timeToRead,
 		})
 	}
 	mapMutex.RUnlock()
