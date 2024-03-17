@@ -121,7 +121,7 @@ func (a *app) getCreationDate(info os.FileInfo) (time.Time, error) {
 		return time.Time{}, errors.New("failed to get native file information")
 	}
 
-	birthTime, ok := getFileCreationTime(nativeInfo)
+	birthTime, ok := a.getFileCreationTime(nativeInfo)
 	if !ok {
 		return time.Time{}, errors.New("file system doesn't support creation time")
 	}
@@ -129,26 +129,18 @@ func (a *app) getCreationDate(info os.FileInfo) (time.Time, error) {
 	return birthTime, nil
 }
 
-func getFileCreationTime(nativeInfo *syscall.Stat_t) (time.Time, bool) {
-	birthTime := getBirthTime(nativeInfo)
+func (a *app) getFileCreationTime(nativeInfo *syscall.Stat_t) (time.Time, bool) {
+	birthTime := a.getBirthTime(nativeInfo)
 	if !birthTime.IsZero() {
 		return birthTime, true
 	}
 
-	modTime := getModTime(nativeInfo)
+	modTime := a.getModTime(nativeInfo)
 	if !modTime.IsZero() {
 		return modTime, false
 	}
 
 	return time.Time{}, false
-}
-
-func getBirthTime(nativeInfo *syscall.Stat_t) time.Time {
-	return getTimeFromTimespec(nativeInfo, unsafe.Pointer(&nativeInfo.Ctim))
-}
-
-func getModTime(nativeInfo *syscall.Stat_t) time.Time {
-	return getTimeFromTimespec(nativeInfo, unsafe.Pointer(&nativeInfo.Mtim))
 }
 
 func getTimeFromTimespec(_ *syscall.Stat_t, specField unsafe.Pointer) time.Time {
