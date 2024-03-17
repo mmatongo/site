@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"net/http"
 	"os"
@@ -46,7 +47,27 @@ func (a *app) handleBlog(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	output := markdown.ToHTML(data, nil, nil)
+	fileInfo, err := os.Stat(filePath)
+	if err != nil {
+		a.errorLog.Printf("Error getting file info: %v\n", err)
+		http.Error(w, "Internal server error", http.StatusInternalServerError)
+		return
+	}
+
+	creationDate, err := a.getCreationDate(fileInfo)
+
+	if err != nil {
+		a.errorLog.Printf("Error getting creation date: %v\n", err)
+		http.Error(w, "Internal server error", http.StatusInternalServerError)
+		return
+	}
+
+	date := creationDate.Format("January 2, 2006 3:04 PM")
+
+	formattedContent := fmt.Sprintf("### Published: %s\n\n%s", date, data)
+
+	output := markdown.ToHTML([]byte(formattedContent), nil, nil)
+
 	err = blogTmpl.ExecuteTemplate(w, "blog", map[string]interface{}{
 		"Name":            a.config["blog_name"],
 		"DescriptionMeta": a.config["description"],

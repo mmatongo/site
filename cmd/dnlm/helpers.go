@@ -1,11 +1,14 @@
 package main
 
 import (
+	"errors"
 	"flag"
 	"io/fs"
 	"os"
 	"path/filepath"
 	"strings"
+	"syscall"
+	"time"
 
 	"github.com/fsnotify/fsnotify"
 	"gopkg.in/yaml.v3"
@@ -105,4 +108,21 @@ func (a *app) acceptArgs() string {
 	}
 
 	return config
+}
+
+func (a *app) getCreationDate(info os.FileInfo) (time.Time, error) {
+	if info == nil {
+		return time.Time{}, errors.New("file information is nil")
+	}
+
+	nativeInfo, ok := info.Sys().(*syscall.Stat_t)
+	if !ok {
+		return time.Time{}, errors.New("failed to get native file information")
+	}
+
+	if nativeInfo.Birthtimespec.Nsec == 0 {
+		return time.Time{}, errors.New("file system doesn't support creation time")
+	}
+
+	return time.Unix(nativeInfo.Birthtimespec.Sec, nativeInfo.Birthtimespec.Nsec), nil
 }
