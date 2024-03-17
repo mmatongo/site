@@ -1,4 +1,4 @@
-# Learning Go: A Weather App Adventure
+## A Weather App Adventure
 
 A few months ago, I decided to dive into the world of Go and incorporate it into my current stack. Now, I'm no Go guru, but I can read, write, and understand it well enough to utilize it as effectively as possible.
 

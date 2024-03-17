@@ -1,5 +1,3 @@
-# Who am I?
-
 Hi everyone, my names are Matongo Mulindi but to most people that know me I go by the name of Daniel.
 I've never written a blog before, but after what has seemingly been a quasi-quarter life crisis or just an inquisitive youth trying to navigate the chaos that is the millennial age (I'm yet to figure out which of the two it is), I've decided to give it a try!
 

@@ -1,5 +1,3 @@
-# Old Soul
-
 >“There is a beautiful thing inside you that is thousands of years old.
 >Too old to be captured in poems.
 >Too old to be loved by everyone, but loved so very deeply by a chosen few.”

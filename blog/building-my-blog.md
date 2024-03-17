@@ -1,5 +1,3 @@
-# Building my blog
-
 A few weeks ago I decided to rebuild my website. initially, I had been using a highly customised next.js blog starter but it never really felt like it was mine. In my initial design, I was aiming for something along the lines of [this](https://muan.co) but I never really got to that point. I was always too busy to work on it and when I did, I was always too tired to make any meaningful progress. So I decided to start from scratch and build something that I could be proud of.
 
 > “How much you can learn when you fail determines how far you will go into achieving your goals.”

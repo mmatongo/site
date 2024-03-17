@@ -1,5 +1,3 @@
-# Kind Eyes
-
 For as long as I can remember, I have always loved taking
 walks. I'm not sure if it's the calmness of natures silence
 or my desperate need to wholly embrace the company of self,
