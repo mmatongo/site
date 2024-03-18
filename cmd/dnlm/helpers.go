@@ -14,6 +14,8 @@ import (
 	"unsafe"
 
 	"github.com/fsnotify/fsnotify"
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 	"gopkg.in/yaml.v3"
 )
 
@@ -154,8 +156,9 @@ func getTimeFromTimespec(_ *syscall.Stat_t, specField unsafe.Pointer) time.Time 
 }
 
 func (a *app) getNameFromFilePath(filePath string) string {
-	title := strings.Title(strings.TrimSuffix(strings.TrimPrefix(filePath, "blog/"), ".md"))
+	title := cases.Title(language.Und).String(filepath.Base(filePath))
 	title = strings.Replace(title, "-", " ", -1)
+	title = strings.TrimSuffix(title, ".md")
 
 	return title
 }
