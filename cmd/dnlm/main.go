@@ -13,6 +13,7 @@ var (
 		"./ui/templates/index.layout.gohtml",
 		"./ui/templates/blog_index.page.gohtml",
 		"./ui/templates/head.partial.gohtml",
+		"./ui/templates/footer.partial.gohtml",
 	}
 
 	indexTmpl = template.Must(template.ParseFiles(indexFiles...))
@@ -20,6 +21,7 @@ var (
 	blogFiles = []string{
 		"./ui/templates/blog.layout.gohtml",
 		"./ui/templates/head.partial.gohtml",
+		"./ui/templates/footer.partial.gohtml",
 	}
 
 	blogTmpl = template.Must(template.ParseFiles(blogFiles...))

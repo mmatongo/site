@@ -44,9 +44,13 @@ All other directories and files are MIT Licensed (where applicable).
 
 ## TODO
 
-- [] Footer
+- [x] Footer
 - [] Notes
 - [] Recent Posts
 - [x] Publish Date
 - [] Tags
 - [] Asset [compression](https://github.com/tdewolff/minify)
+- [] RSS Feed
+- [] Sitemap
+- [] WCAG Compliance
+
