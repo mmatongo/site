@@ -91,4 +91,4 @@ func updateURLToFileMap(filePath string) {
 This is by far not the most efficient wat to do this and the code makes alot of very unhealthy assumptions but it works for now.
 Basically, we get rid of the blog/ prefix and the .md suffix and replace all underscores with hyphens. We then add the path to the map if it exists and remove it if it doesn't.
 
-The repository for the blog is open source and can be found [here](https://github.com/mmatongo/site). It can be found on the v2 branch. I'm still working on it and I'm open to any suggestions or contributions.
+The repository for the blog is open source and can be found [here](https://github.com/mmatongo/site). I'm still working on it and I'm open to any suggestions or contributions.
