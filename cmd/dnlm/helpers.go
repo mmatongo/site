@@ -207,6 +207,7 @@ func (a *app) removeMarkdownSyntax(text string) string {
 		`_\S.*?_`,           // Italic with _text_
 		`\\*.*?\\*`,         // Italic with *text*
 		"`.*?`",             // Inline code with `code`
+		"```.*?```",         // block code with ```code```
 		`~~.*?~~`,           // Strikethrough with ~~text~~
 		`<.*?>`,             // HTML tags
 		`#+`,                // Headings
