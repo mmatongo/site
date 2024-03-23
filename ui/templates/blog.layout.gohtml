@@ -16,6 +16,10 @@
             {{ .Content }}
         </main>
     </body>
-    {{ template "footer" .}}
+    <footer>
+        <nav aria-label="About this site">
+            <a href="{{.Source}}" target="_blank" rel="noopener noreferrer">View source</a>
+        </nav>
+    </footer>
 </html>
 {{ end }}
