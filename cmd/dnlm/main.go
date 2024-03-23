@@ -26,6 +26,14 @@ var (
 
 	blogTmpl = template.Must(template.ParseFiles(blogFiles...))
 
+	notFound = []string{
+		"./ui/templates/404.layout.gohtml",
+		"./ui/templates/head.partial.gohtml",
+		"./ui/templates/footer.partial.gohtml",
+	}
+
+	notFoundTmpl = template.Must(template.ParseFiles(notFound...))
+
 	mapMutex     = &sync.RWMutex{}
 	urlToFileMap = make(map[string]string)
 )
@@ -65,6 +73,8 @@ func main() {
 			a.handleBlogIndex(w, r) // Handle the blog index (this is weird)
 		}
 	})
+	mux.HandleFunc("/sitemap.xml", a.handleSitemap)
+	mux.HandleFunc("/rss.xml", a.handleRSS)
 
 	srv := &http.Server{
 		Addr:     ":" + port,
