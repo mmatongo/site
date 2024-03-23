@@ -17,7 +17,7 @@ or
 
 ```
 $ go build -o ./bin/web ./cmd/dnlm
-$ ./bin/dnlm
+$ ./bin/web
 ```
 
 The application will be available at [http://localhost:4000](http://localhost:4000).
@@ -45,12 +45,13 @@ All other directories and files are MIT Licensed (where applicable).
 ## TODO
 
 - [x] Footer
-- [] Notes
-- [] Recent Posts
+- [ ] Notes
+- [ ] Recent Posts
 - [x] Publish Date
-- [] Tags
-- [] Asset [compression](https://github.com/tdewolff/minify)
-- [] RSS Feed
-- [] Sitemap
-- [] WCAG Compliance
+- [x] 404 Page
+- [ ] Tags
+- [ ] Asset [compression](https://github.com/tdewolff/minify)
+- [x] RSS Feed
+- [x] Sitemap
+- [ ] WCAG Compliance
 
