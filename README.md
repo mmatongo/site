@@ -54,4 +54,7 @@ All other directories and files are MIT Licensed (where applicable).
 - [x] RSS Feed
 - [x] Sitemap
 - [ ] WCAG Compliance
+- [ ] Fix [Lighthouse](https://developers.google.com/web/tools/lighthouse) issues
+- [ ] [Open Graph](https://ogp.me/) meta tags
+- [x] Fix RSS pubDate issue (we are using the current time instead of the post time)
 
