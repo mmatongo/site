@@ -16,9 +16,10 @@ type app struct {
 }
 
 type blogPost struct {
-	Title string
-	URL   string
-	Time  string
+	Title     string
+	URL       string
+	Time      string
+	CreatedAt time.Time
 }
 
 type Urlset struct {

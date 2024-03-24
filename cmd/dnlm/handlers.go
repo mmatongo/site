@@ -92,16 +92,20 @@ func (a *app) handleBlogIndex(w http.ResponseWriter, r *http.Request) {
 		}
 		timeToRead := fmt.Sprintf("%d.%d min", minutes, seconds)
 
+		fileInfo, _ := os.Stat(filePath)
+		creationDate, _ := a.getCreationDate(fileInfo)
+
 		posts = append(posts, blogPost{
-			Title: title,
-			URL:   url,
-			Time:  timeToRead,
+			Title:     title,
+			URL:       url,
+			Time:      timeToRead,
+			CreatedAt: creationDate,
 		})
 	}
 	mapMutex.RUnlock()
 
 	sort.Slice(posts, func(i, j int) bool {
-		return posts[i].Title < posts[j].Title
+		return posts[i].CreatedAt.Before(posts[j].CreatedAt)
 	})
 
 	err := indexTmpl.ExecuteTemplate(w, "blogIndex", map[string]interface{}{
@@ -152,9 +156,11 @@ func (a *app) handleSitemap(w http.ResponseWriter, r *http.Request) {
 			continue
 		}
 
+		creationDate, _ := a.getCreationDate(fileInfo)
+
 		urls = append(urls, Url{
 			Loc:        "https://dnlm.pw/blog/" + urlPath,
-			LastMod:    fileInfo.ModTime(),
+			LastMod:    creationDate,
 			ChangeFreq: "monthly",
 			Priority:   0.8,
 		})
@@ -192,13 +198,13 @@ func (a *app) handleRSS(w http.ResponseWriter, r *http.Request) {
 		title := a.getNameFromFilePath(filePath)
 		description := string(markdown.ToHTML(data, nil, nil))
 		link := "https://dnlm.pw/blog/" + urlPath
-		pubDate := fileInfo.ModTime().Format(time.RFC1123Z)
+		pubDate, _ := a.getCreationDate(fileInfo)
 
 		items = append(items, RssItem{
 			Title:       title,
 			Link:        link,
 			Description: description,
-			PubDate:     pubDate,
+			PubDate:     pubDate.Format(time.RFC1123Z),
 			GUID:        link,
 		})
 
