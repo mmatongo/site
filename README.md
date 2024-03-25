@@ -22,7 +22,7 @@ $ go build -o ./bin/web ./cmd/dnlm
 $ ./bin/web
 ```
 
-The application will be available at [http://localhost:4000](http://localhost:4000).
+The application will be available at [http://localhost:4000](http://localhost:4000) by default.
 
 The app also accepts an optional `-config` flag to specify the location of the configuration file. The default location is `./config/config.yml` so you can run the app with a custom configuration file like so:
 
