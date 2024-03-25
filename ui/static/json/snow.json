@@ -1,0 +1,67 @@
+{
+    "version": "https://jsonfeed.org/version/1.1",
+    "title": ".snow",
+    "icon": "https://github.com/mmatongo.png",
+    "home_page_url": "https://dnlm.pw",
+    "feed_url": "https://dnlm.pw/static/json/snow.json",
+    "description": "A feed of stuff.",
+    "_open_stories": {
+        "version": "0.0.9"
+    },
+    "items": [
+        {
+            "id": "first-snow",
+            "content_html": "<img src='https://cdn.dnlm.pw/dnlm/static/images/first-snow.JPG' alt='first-snow.JPG'>",
+            "_open_stories": {
+                "mime_type": "image/jpeg",
+                "url": "https://cdn.dnlm.pw/dnlm/static/images/first-snow.JPG",
+                "alt": "My first snow",
+                "duration_in_seconds": 5,
+                "caption": "I got a text from a coworker that it was snowing. I looked outside and saw the snow. I was excited. I took a picture."
+            }
+        },
+        {
+            "id": "more-snow",
+            "content_html": "<img src='https://cdn.dnlm.pw/dnlm/static/images/more-snow.JPG' alt='more-snow.JPG'>",
+            "_open_stories": {
+                "mime_type": "image/jpeg",
+                "url": "https://cdn.dnlm.pw/dnlm/static/images/more-snow.JPG",
+                "alt": "More snow",
+                "duration_in_seconds": 5,
+                "caption": "This is at Green park. I love how the slow looks on the trees and grass."
+            }
+        },
+        {
+            "id": "park-snow",
+            "content_html": "<img src='https://cdn.dnlm.pw/dnlm/static/images/park-snow.JPG' alt='park-snow.JPG'>",
+            "_open_stories": {
+                "mime_type": "image/jpeg",
+                "url": "https://cdn.dnlm.pw/dnlm/static/images/park-snow.JPG",
+                "alt": "Walkway covered in snow",
+                "duration_in_seconds": 5,
+                "caption": "Behold, footprints in the snow."
+            }
+        },
+        {
+            "id": "yay-snow",
+            "content_html": "<img src='https://cdn.dnlm.pw/dnlm/static/images/yay-snow.JPG' alt='yay-snow.JPG'>",
+            "_open_stories": {
+                "mime_type": "image/jpeg",
+                "url": "https://cdn.dnlm.pw/dnlm/static/images/yay-snow.JPG",
+                "alt": "Shoes in snow",
+                "duration_in_seconds": 5,
+                "caption": "Obligatory shoes in snow picture."
+            }
+        },
+        {
+            "id": "park",
+            "content_html": "<img src='https://cdn.dnlm.pw/dnlm/static/images/park.JPG' alt='park.JPG'>",
+            "_open_stories": {
+                "mime_type": "image/jpeg",
+                "url": "https://cdn.dnlm.pw/dnlm/static/images/park.JPG",
+                "alt": "Green park",
+                "duration_in_seconds": 5
+            }
+        }
+    ]
+}

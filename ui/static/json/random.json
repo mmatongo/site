@@ -1,0 +1,95 @@
+{
+    "version": "https://jsonfeed.org/version/1.1",
+    "title": ".random",
+    "icon": "https://github.com/mmatongo.png",
+    "home_page_url": "https://dnlm.pw",
+    "feed_url": "https://dnlm.pw/static/json/random.json",
+    "description": "A feed of stuff.",
+    "_open_stories": {
+        "version": "0.0.9"
+    },
+    "items": [
+        {
+            "id": "darkhorse-view",
+            "content_html": "<img src='https://cdn.dnlm.pw/dnlm/static/images/darkhorse-view.JPG' alt='darkhorse-view.JPG'>",
+            "_open_stories": {
+                "mime_type": "image/jpeg",
+                "url": "https://cdn.dnlm.pw/dnlm/static/images/darkhorse-view.JPG",
+                "alt": "View from the Dark Horse",
+                "duration_in_seconds": 5,
+                "caption": "I was probaly looking for orange fanta"
+            }
+        },
+        {
+            "id": "random-road",
+            "content_html": "<img src='https://cdn.dnlm.pw/dnlm/static/images/random-road.JPG' alt='random-road.JPG'>",
+            "_open_stories": {
+                "mime_type": "image/jpeg",
+                "url": "https://cdn.dnlm.pw/dnlm/static/images/random-road.JPG",
+                "alt": "Completely random road",
+                "duration_in_seconds": 5
+            }
+        },
+        {
+            "id": "work-outing",
+            "content_html": "<img src='https://cdn.dnlm.pw/dnlm/static/images/work-outing.JPG' alt='work-outing.JPG'>",
+            "_open_stories": {
+                "mime_type": "image/jpeg",
+                "url": "https://cdn.dnlm.pw/dnlm/static/images/work-outing.JPG",
+                "alt": "Work outing",
+                "duration_in_seconds": 5
+            }
+        },
+        {
+            "id": "bench",
+            "content_html": "<img src='https://cdn.dnlm.pw/dnlm/static/images/bench.JPG' alt='bench.JPG'>",
+            "_open_stories": {
+                "mime_type": "image/jpeg",
+                "url": "https://cdn.dnlm.pw/dnlm/static/images/bench.JPG",
+                "alt": "A random bench",
+                "duration_in_seconds": 5,
+                "caption": "'How much time have you already wasted?'"
+            }
+        },
+        {
+            "id": "fence",
+            "content_html": "<img src='https://cdn.dnlm.pw/dnlm/static/images/fence.JPG' alt='fence.JPG'>",
+            "_open_stories": {
+                "mime_type": "image/jpeg",
+                "url": "https://cdn.dnlm.pw/dnlm/static/images/fence.JPG",
+                "alt": "A fence",
+                "duration_in_seconds": 5
+            }
+        },
+        {
+            "id": "kbench",
+            "content_html": "<img src='https://cdn.dnlm.pw/dnlm/static/images/kbench.JPG' alt='kbench.JPG'>",
+            "_open_stories": {
+                "mime_type": "image/jpeg",
+                "url": "https://cdn.dnlm.pw/dnlm/static/images/kbench.JPG",
+                "alt": "A bench in kingsmead square",
+                "duration_in_seconds": 5
+            }
+        },
+        {
+            "id": "iforgetwherethiswas",
+            "content_html": "<img src='https://cdn.dnlm.pw/dnlm/static/images/iforgetwherethiswas.JPG' alt='iforgetwherethiswas.JPG'>",
+            "_open_stories": {
+                "mime_type": "image/jpeg",
+                "url": "https://cdn.dnlm.pw/dnlm/static/images/iforgetwherethiswas.JPG",
+                "alt": "Stairs",
+                "duration_in_seconds": 5
+            }
+        },
+        {
+            "id": "lamp",
+            "content_html": "<img src='https://cdn.dnlm.pw/dnlm/static/images/lamp.JPG' alt='lamp.JPG'>",
+            "_open_stories": {
+                "mime_type": "image/jpeg",
+                "url": "https://cdn.dnlm.pw/dnlm/static/images/lamp.JPG",
+                "alt": "streetlamp",
+                "duration_in_seconds": 5
+            }
+        }
+    ]
+}

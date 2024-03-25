@@ -38,6 +38,7 @@ The following directories and their contents are Copyright Daniel M. Matongo. Yo
 blog/
 notes/
 ui/static/images/
+ui/static/json/
 ```
 
 All other directories and files are MIT Licensed (where applicable).
