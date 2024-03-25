@@ -6,6 +6,8 @@ Code for [dnlm.pw](https://dnlm.pw), a personal website.
 
 - HTML, CSS
 - [GoLang](https://golang.org/)
+- [Heroku](https://www.heroku.com/)
+- [Cloudflare R2 Storage](https://developers.cloudflare.com/r2/)
 
 ## Development
 
@@ -59,3 +61,8 @@ All other directories and files are MIT Licensed (where applicable).
 - [ ] [Open Graph](https://ogp.me/) meta tags
 - [x] Fix RSS pubDate issue (we are using the current time instead of the post time)
 
+
+Note: The `TODO` list is not exhaustive and will be updated as needed.
+
+This project is licensed under the BSD 3-Clause License.
+See [LICENSE](LICENSE) for more information.
