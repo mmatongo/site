@@ -17,6 +17,16 @@
                 <br>
                 <p>Outside of <a href="#">work</a>, I enjoy <a href="https://github.com/mmatongo">contributing to open source projects</a> and learning languages.</p>
             </section>
+            <section>
+                <h2>Stories</h2>
+                <div class="open-stories">
+                    <open-stories src="/static/json/random.json" class="story" show-metadata is-highlight loading="lazy">.random</open-stories>
+                    <open-stories src="/static/json/vacation.json" class="story" show-metadata is-highlight loading="lazy">.vacation</open-stories>
+                    <open-stories src="/static/json/bath.json" class="story" show-metadata is-highlight loading="lazy">.bath</open-stories>
+                    <open-stories src="/static/json/snow.json" class="story" show-metadata is-highlight loading="lazy">.snow</open-stories>
+                    <open-stories src="/static/json/sunsets.json" class="story" show-metadata is-highlight loading="lazy">.sunsets</open-stories>
+                </div>
+            </section>
         </body>
         {{ template "footer" .}}
     </html>
